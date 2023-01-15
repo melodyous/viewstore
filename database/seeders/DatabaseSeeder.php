@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -42,6 +43,11 @@ class DatabaseSeeder extends Seeder
             'price' => 1390000,
             'stock' => 50,
             'image' => '/storage/product-images/ryzen3.jpg'
+        ]);
+
+        Category::create([
+            'category_id' => 'P-processor',
+            'name' => 'Processor'
         ]);
 
 
