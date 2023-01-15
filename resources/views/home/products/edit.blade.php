@@ -13,6 +13,9 @@
             @csrf
             <h3 class="fw-bold">Edit Product</h3>
             <hr class="mb-4">
+            <div class="text-center mb-4">
+                <img src="{{ $productEdit->image }}" alt="{{ $productEdit->name }}" class="img-fluid" style="height: 200px; width: auto">
+            </div>
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 90px">Name</span>
                 <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('name', $productEdit->name) }}">

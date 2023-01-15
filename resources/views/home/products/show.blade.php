@@ -9,7 +9,6 @@
 <div class="row">
     <aside class="col-lg-4 px-3 pt-4">
         <form action="/home/products/{{ $productShow->product_id }}" method="POST" enctype="multipart/form-data">
-            @method('put')
             @csrf
             <h3 class="fw-bold">Product Details</h3>
             <hr class="mb-4">
@@ -20,40 +19,40 @@
 
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width:100px">Name</span>
-                <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('name', $productShow->name) }}">
+                <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('name', $productShow->name) }}" @disabled(true)>
             </div>
 
 
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width:100px">Product Id</span>
-                <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('name', $productShow->product_id) }}">
+                <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('name', $productShow->product_id) }}" @disabled(true)>
             </div>
 
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width:100px">Price</span>
-                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Rp.1234" aria-label="Username" aria-describedby="addon-wrapping" value="@currency($productShow['price'])">
+                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Rp.1234" aria-label="Username" aria-describedby="addon-wrapping" value="@currency($productShow['price'])" @disabled(true)>
             </div>
 
 
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width:100px">Stock</span>
-                <input type="text" name="stock" class="form-control @error('stock') is-invalid @enderror" placeholder="1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('stock', $productShow->stock) }}">
+                <input type="text" name="stock" class="form-control @error('stock') is-invalid @enderror" placeholder="1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('stock', $productShow->stock) }}" @disabled(true)>
             </div>
 
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width:100px">Category</span>
-                <input type="text" name="stock" class="form-control @error('stock') is-invalid @enderror" placeholder="1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('stock', $productShow->category->name) }}">
+                <input type="text" name="stock" class="form-control @error('stock') is-invalid @enderror" placeholder="1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('stock', $productShow->category->name) }}" @disabled(true)>
             </div>
 
 
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width:100px">Added at</span>
-                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Rp.1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ ($productShow->created_at)->format('d-m-Y') }}">
+                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Rp.1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ ($productShow->created_at)->format('d-m-Y') }}" @disabled(true)>
             </div>
 
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 100px">Last update</span>
-                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Rp.1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ ($productShow->updated_at)->format('d-m-Y') }}">
+                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Rp.1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ ($productShow->updated_at)->format('d-m-Y') }}" @disabled(true)>
             </div>
             
         </form>
