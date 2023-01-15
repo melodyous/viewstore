@@ -5,11 +5,11 @@
     <aside class="col-lg-4 px-3 pt-4">
         <form action="/home/products/" method="POST" enctype="multipart/form-data">
             @csrf
-            <h3 class="fw-bold">Add Product</h3>
+            <h3 class="fw-bold">Edit Product</h3>
             <hr class="mb-4">
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 90px">Name</span>
-                <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('name') }}">
+                <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('name', $productEdit->name) }}">
             </div>
             @error('name')
             <div class="alert alert-danger" role="alert">
@@ -19,7 +19,7 @@
 
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 90px">Price</span>
-                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Rp.1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('price') }}">
+                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Rp.1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('price', $productEdit->price) }}">
             </div>
             @error('price')
             <div class="alert alert-danger" role="alert">
@@ -29,7 +29,7 @@
 
             <div class="input-group flex-nowrap mb-2">
                 <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 90px">Stock</span>
-                <input type="text" name="stock" class="form-control @error('stock') is-invalid @enderror" placeholder="1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('stock') }}">
+                <input type="text" name="stock" class="form-control @error('stock') is-invalid @enderror" placeholder="1234" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('stock', $productEdit->stock) }}">
             </div>
             @error('stock')
             <div class="alert alert-danger" role="alert">
@@ -42,7 +42,7 @@
                 <select class="form-select @error('category_id') is-invalid @enderror" name="category_id">
                     <option value="" selected>No category chosen</option>
                     @foreach ($categories as $category)
-                        @if ( old('category_id') )
+                        @if ( $productEdit->category_id == $category->id )
                             <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
                         @else
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -65,7 +65,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn w-100 text-white" style="background-color: #183153"><i class="fa-solid fa-file-circle-plus"></i> Add product</button>
+            <button type="submit" class="btn w-100 text-white" style="background-color: #183153"><i class="fa-solid fa-pencil"></i> Edit product</button>
         </form>
     </aside>
     <section class="col-lg-8 px-3">

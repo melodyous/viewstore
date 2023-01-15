@@ -91,7 +91,12 @@ class HomeProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('home.products.edit', [
+            'title' => 'Edit Product',
+            'productEdit' => $product,
+            'products' => Product::orderBy('id', 'desc')->get(),
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -103,7 +108,43 @@ class HomeProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+
+        if($request->image != NULL){
+            $rules = [
+                'image' => 'image|file|max:2048'
+            ];
+
+            $request['image'] = "/storage/" . $request['image'];
+        }
+
+        if($request->name != $product->name){
+            $rules = [
+                'product_id' => 'required|unique:products'
+            ];
+        }
+
+        $rules = [
+            'category_id' => 'required',
+            'name' => 'required|String',
+            'price' => 'required|Integer',
+            'stock' => 'required|Integer',
+        ];
+
+        
+
+        $validatedData = $request->validate($rules);
+        // store images to folder
+        if( $request->file('image') ){
+            $validatedData['image'] = $request->file('image')->store('product-images');
+        }
+
+        $validatedData['product_id'] = $validatedData['name'];
+        $validatedData['product_id'] = strtolower($validatedData['product_id']);
+        $validatedData['product_id'] = str_replace(' ', '-', $validatedData['product_id']);
+
+        dd($validatedData);
+
+
     }
 
     /**
