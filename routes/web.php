@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeProductController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,9 @@ Route::get('/home/info', [PageController::class, 'info'])->middleware('auth'); /
 // route login
 Route::post('/', [PageController::class, 'authenticate'])->middleware('guest');
 Route::post('/logout', [PageController::class, 'logout']);
+
+
+// resource CRUD products
+Route::resource('/home/products', HomeProductController::class)->middleware('auth');
 
 

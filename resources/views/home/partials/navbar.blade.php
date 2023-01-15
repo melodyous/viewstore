@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #183153">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #183153">
     <div class="container">
       <a class="navbar-brand" style="font-weight: 800" href="/home">VIEWSTORE</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
 
             @auth
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle {{ Request::is('dashboard/users*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle {{ Request::is('home/users*') ? 'active' : '' }} {{ Request::is('home/info') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> {{ auth()->user()->name }}
                 </a>
                 <ul class="dropdown-menu">
