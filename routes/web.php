@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PageController::class, 'index']); // route halaman login
+Route::get('/', [PageController::class, 'index'])->name('login')->middleware('guest'); // route halaman login
 Route::get('/home', [PageController::class, 'home'])->middleware('auth'); // route halaman home
 Route::get('/home/info', [PageController::class, 'info'])->middleware('auth'); // route halaman info
 

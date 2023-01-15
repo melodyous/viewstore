@@ -16,7 +16,7 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function  getRouteKeyName(){
+    public function getRouteKeyName(){
         return 'product_id';
     }
 }

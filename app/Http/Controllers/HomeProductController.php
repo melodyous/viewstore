@@ -16,7 +16,7 @@ class HomeProductController extends Controller
     {
         return view('home.products.index', [
             'title' => 'Products',
-            'products' => Product::orderBy('category_id')->get()
+            'products' => Product::all(),
         ]);
     }
 
@@ -49,7 +49,7 @@ class HomeProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        dd($product);
     }
 
     /**
@@ -83,6 +83,7 @@ class HomeProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Product::destroy($product->id);
+        return redirect('/home/products');
     }
 }
