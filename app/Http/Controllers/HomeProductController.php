@@ -67,7 +67,7 @@ class HomeProductController extends Controller
         // dd($validatedData);
 
         Product::create($validatedData);
-        return redirect('/home/products/create');
+        return redirect('/home/products/create')->with('success', 'A product has been added!');
         
     }
 
@@ -153,6 +153,6 @@ class HomeProductController extends Controller
     public function destroy(Product $product)
     {
         Product::destroy($product->id);
-        return redirect('/home/products');
+        return redirect('/home/products')->with('success', 'A product has been deleted!');
     }
 }

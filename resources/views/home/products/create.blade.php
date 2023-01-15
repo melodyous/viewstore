@@ -1,6 +1,10 @@
 @extends('home.partials.main')
 
 @section('container')
+@if( session()->has('success') )
+    @include('home.partials.modalNotif')
+@endif
+
 <div class="row">
     <aside class="col-lg-4 px-3 pt-4">
         <form action="/home/products/" method="POST" enctype="multipart/form-data">
@@ -103,4 +107,15 @@
         </div>
     </section>
 </div>
+
+<script>
+
+    // tutup modal notifikasi
+    document.querySelector('#notification-modal').addEventListener('click', evt => {
+        if( !evt.target.matches('button') ) return;
+        const button = document.querySelector('#notification-modal');
+        button.classList.remove('show', 'd-block');
+    })
+
+</script>
 @endsection

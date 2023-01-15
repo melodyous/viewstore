@@ -1,6 +1,10 @@
 @extends('home.partials.main')
 
 @section('container')
+@if( session()->has('success') )
+    @include('home.partials.modalNotif')
+@endif
+
 <section>
     <div class="row justify-content-center">
 
@@ -35,4 +39,15 @@
         
     </div>
 </section>
+
+<script>
+
+    // tutup modal notifikasi
+    document.querySelector('#notification-modal').addEventListener('click', evt => {
+        if( !evt.target.matches('button') ) return;
+        const button = document.querySelector('#notification-modal');
+        button.classList.remove('show', 'd-block');
+    })
+
+</script>
 @endsection
