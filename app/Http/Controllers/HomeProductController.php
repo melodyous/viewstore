@@ -79,7 +79,11 @@ class HomeProductController extends Controller
      */
     public function show(Product $product)
     {
-        dd($product);
+        return view('home.products.show', [
+            'title' => 'Product Details',
+            'productShow' => $product,
+            'products' => Product::orderBy('category_id', 'desc')->get(),
+        ]);
     }
 
     /**
