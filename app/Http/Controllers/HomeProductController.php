@@ -48,18 +48,17 @@ class HomeProductController extends Controller
             'name' => 'required|String',
             'price' => 'required|Integer',
             'stock' => 'required|Integer',
-            'image' => 'image|file|max:2048'
+            'image' => 'required|image|file|max:2048'
         ];
 
-        
 
         $validatedData = $request->validate($rules);
         // store images to folder
         if( $request->file('image') ){
             $validatedData['image'] = $request->file('image')->store('product-images');
         }
-
         $validatedData['image'] = '/storage/' . $validatedData['image'];
+
 
         $validatedData['product_id'] = $validatedData['name'];
         $validatedData['product_id'] = strtolower($validatedData['product_id']);
@@ -109,17 +108,9 @@ class HomeProductController extends Controller
     public function update(Request $request, Product $product)
     {
 
-        if($request->image != NULL){
+        if($request->image){
             $rules = [
                 'image' => 'image|file|max:2048'
-            ];
-
-            $request['image'] = "/storage/" . $request['image'];
-        }
-
-        if($request->name != $product->name){
-            $rules = [
-                'product_id' => 'required|unique:products'
             ];
         }
 
@@ -136,13 +127,19 @@ class HomeProductController extends Controller
         // store images to folder
         if( $request->file('image') ){
             $validatedData['image'] = $request->file('image')->store('product-images');
+            $validatedData['image'] = '/storage/' . $validatedData['image'];
         }
 
         $validatedData['product_id'] = $validatedData['name'];
         $validatedData['product_id'] = strtolower($validatedData['product_id']);
         $validatedData['product_id'] = str_replace(' ', '-', $validatedData['product_id']);
 
-        dd($validatedData);
+        // dd($validatedData);
+
+        Product::where('id', $product->id)
+            ->update($validatedData);
+
+        return redirect('/home/products/' . $product->product_id . '/edit')->with('success', 'A product has been updated!');
 
 
     }
