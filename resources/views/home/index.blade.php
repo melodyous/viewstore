@@ -1,5 +1,5 @@
 @extends('home.partials.main')
 
 @section('container')
-    <h1>{{ $title }}</h1>
+    <h1>{{ auth()->user()->name }}</h1>
 @endsection

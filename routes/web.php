@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PageController::class, 'index']); // route halaman login
+Route::get('/home', [PageController::class, 'home'])->middleware('auth'); // route halaman home
 Route::get('/home/info', [PageController::class, 'info'])->middleware('auth'); // route halaman info
 
 
 // route login
 Route::post('/', [PageController::class, 'authenticate'])->middleware('guest');
 Route::post('/logout', [PageController::class, 'logout']);
+
+

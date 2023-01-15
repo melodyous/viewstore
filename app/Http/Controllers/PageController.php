@@ -19,6 +19,12 @@ class PageController extends Controller
         ]);
     }
 
+    public function home(){
+        return view('home.index', [
+            'title' => 'Home'
+        ]);
+    }
+
     // fungsi autentikasi user login
     public function authenticate( Request $request ){
         $credentials = $request->validate([
@@ -29,7 +35,7 @@ class PageController extends Controller
 
         if( Auth::attempt($credentials) ){
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/home');
         }
 
         return back()->with('loginError', 'Login Failed');
@@ -44,4 +50,6 @@ class PageController extends Controller
         request()->session()->regenerateToken();
         return redirect('/');
     }
+
+
 }
