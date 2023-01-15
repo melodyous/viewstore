@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,11 @@ class HomeProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('home.products.create', [
+            'title' => 'Add Products',
+            'products' => Product::orderBy('id', 'desc')->get(),
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -38,7 +43,33 @@ class HomeProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'category_id' => 'required',
+            'name' => 'required|String',
+            'price' => 'required|Integer',
+            'stock' => 'required|Integer',
+            'image' => 'image|file|max:2048'
+        ];
+
+        
+
+        $validatedData = $request->validate($rules);
+        // store images to folder
+        if( $request->file('image') ){
+            $validatedData['image'] = $request->file('image')->store('product-images');
+        }
+
+        $validatedData['image'] = '/storage/' . $validatedData['image'];
+
+        $validatedData['product_id'] = $validatedData['name'];
+        $validatedData['product_id'] = strtolower($validatedData['product_id']);
+        $validatedData['product_id'] = str_replace(' ', '-', $validatedData['product_id']);
+
+        // dd($validatedData);
+
+        Product::create($validatedData);
+        return redirect('/home/products/create');
+        
     }
 
     /**

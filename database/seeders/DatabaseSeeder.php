@@ -69,6 +69,18 @@ class DatabaseSeeder extends Seeder
             'image' => '/storage/product-images/amdradeon.jpg'
         ]);
 
+        $name = 'Asrock Radeon RX 6500 XT PHANTOM';
+        $name = strtolower($name);
+        $name = str_replace(' ', '-', $name);
+        Product::create([
+            'category_id' => 2,
+            'product_id' => $name,
+            'name' => 'Asrock Radeon RX 6500 XT PHANTOM',
+            'price' => 2610000,
+            'stock' => 50,
+            'image' => '/storage/product-images/amdradeon.jpg'
+        ]);
+
 
 
 
