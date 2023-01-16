@@ -82,6 +82,7 @@
                             <th class="text-center"><i class="fa-solid fa-gear"></i></th>
                             <th>Customer</th>
                             <th>Total</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <!--Table head-->
@@ -107,6 +108,7 @@
                             </td>
                             <td>{{ $order->customer_name }}</td>
                             <td>@currency($order['total'])</td>
+                            <td>{{ $order->order_status }}</td>
                         </tr>
                         @endforeach
                 

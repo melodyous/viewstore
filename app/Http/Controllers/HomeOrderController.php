@@ -88,7 +88,11 @@ class HomeOrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('home.orders.edit', [
+            'title' => 'Edit data order',
+            'orderEdit' => $order,
+            'orders' => Order::all()
+        ]);
     }
 
     /**
@@ -100,7 +104,21 @@ class HomeOrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        
+        $rules = [
+            'customer_name' => 'required|String',
+            'order_status' => 'required|String',
+            'customer_phone' => 'String|nullable',
+            'customer_email' => 'String|nullable'
+        ];
+        
+        
+        $validatedData = $request->validate($rules);
+
+        // dd($validatedData);
+
+        Order::where('id', $order->id)->update($validatedData);
+        return redirect('/home/orders/' . $order->id)->with('success', 'Payment status changed!');
     }
 
     /**

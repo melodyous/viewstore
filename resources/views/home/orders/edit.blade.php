@@ -5,22 +5,11 @@
     @include('home.partials.modalNotif')
 @endif
 
-@php
-    if ($orderShow->customer_phone == NULL) {
-        $orderShow->customer_phone = '-';
-    }
-@endphp
-
-@php
-    if ($orderShow->customer_email == NULL) {
-        $orderShow->customer_email = '-';
-    }
-@endphp
-
 <section>
     <div class="row">
         <div class="col-md-7 px-4 py-3">
-            <form action="/home/orders" method="POST">
+            <form action="/home/orders/{{ $orderEdit->id }}" method="POST">
+                @method('put')
                 @csrf
 
                 <h3 class="fw-bold">Make New Order</h3>
@@ -28,43 +17,53 @@
 
                 <div class="input-group flex-nowrap mb-2">
                     <span class="input-group-text @error('customer_name') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Customer Name</span>
-                    <input type="text" name="customer_name" id="floatingInput" class="form-control @error('customer_name') is-invalid @enderror" placeholder="Name" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderShow->customer_name }}">
+                    <input type="text" name="customer_name" id="floatingInput" class="form-control @error('customer_name') is-invalid @enderror" placeholder="Name" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderEdit->customer_name }}">
                 </div>
 
                 <div class="input-group flex-nowrap mb-2">
                     <span class="input-group-text @error('customer_phone') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Phone Number</span>
-                    <input type="text" name="customer_phone" id="floatingInput" class="form-control @error('customer_phone') is-invalid @enderror" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderShow->customer_phone }}">
+                    <input type="text" name="customer_phone" id="floatingInput" class="form-control @error('customer_phone') is-invalid @enderror" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderEdit->customer_phone }}">
                 </div>
 
                 <div class="input-group flex-nowrap mb-2">
-                    <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Email</span>
-                    <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderShow->customer_email }}">
+                    <span class="input-group-text @error('customer_email') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Email</span>
+                    <input type="text" name="customer_email" id="floatingInput" class="form-control @error('customer_email') is-invalid @enderror" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderEdit->customer_email }}">
                 </div>
 
                 <div class="input-group flex-nowrap mb-2">
-                    <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Product</span>
-                    <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderShow->order_item }}">
+                    <span class="input-group-text @error('order_item') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Product</span>
+                    <input type="text" name="order_item" id="floatingInput" class="form-control @error('order_item') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderEdit->order_item }}" @disabled(true)>
                 </div>
 
                 <div class="input-group flex-nowrap mb-2">
-                    <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Price</span>
-                    <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderShow->total }}">
+                    <span class="input-group-text @error('total') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Price</span>
+                    <input type="text" name="total" id="floatingInput" class="form-control @error('total') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderEdit->total }}" @disabled(true)>
                 </div>
 
                 <div class="input-group flex-nowrap mb-2">
                     <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Order Time</span>
-                    <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ ($orderShow->created_at)->format('d-m-Y       H:i') }}">
+                    <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ ($orderEdit->created_at)->format('d-m-Y       H:i') }}" disabled>
                 </div>
 
                 <div class="input-group flex-nowrap mb-2">
                     <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Update Time</span>
-                    <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ ($orderShow->updated_at)->format('d-m-Y       H:i') }}">
+                    <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ ($orderEdit->updated_at)->format('d-m-Y       H:i') }}" @disabled(true)>
                 </div>
 
-                <div class="input-group flex-nowrap mb-2">
-                    <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Status</span>
-                    <input type="text" name="name" id="floatingInput" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderShow->order_status }}">
+                <div class="input-group mb-2">
+                    <span class="input-group-text @error('order_status') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Order Status</span>
+                    <select class="form-select @error('order_status') is-invalid @enderror" name="order_status">
+                        @if ($orderEdit->order_status === 'Already paid')
+                            <option value="Already paid" selected>Already paid</option>
+                            <option value="Waiting for payment">Waiting for payment</option>
+                        @else                            
+                            <option value="Waiting for payment" selected>Waiting for payment</option>
+                            <option value="Already paid">Already paid</option>
+                        @endif
+                    </select>
                 </div>
+
+                <button class="btn text-white bg-danger w-100" type="submit"><i class="fa-solid fa-file-invoice-dollar"></i> Change Payment</button>
             </form>
         </div>
         <div class="col-md-5 px-4 py-3">
