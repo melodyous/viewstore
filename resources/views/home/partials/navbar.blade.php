@@ -7,12 +7,12 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
   
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ Request::is('home') ? 'active' : '' }}" href="/home"><i class="fa-solid fa-house"></i> Home</a>
-            </li>
+            </li> --}}
 
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('home/orders*') ? 'active' : '' }}" href="/home/orders"><i class="fa-solid fa-hard-drive"></i> Orders</a>
+                <a class="nav-link {{ Request::is('home/orders*') ? 'active' : '' }} {{ Request::is('home') ? 'active' : '' }}" href="/home/orders"><i class="fa-solid fa-hard-drive"></i> Orders</a>
             </li>
 
             <li class="nav-item dropdown">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Order;
 
 class PageController extends Controller
 {
@@ -22,8 +24,10 @@ class PageController extends Controller
     }
 
     public function home(){
-        return view('home.index', [
-            'title' => 'Home'
+        return view('home.orders.index', [
+            'title' => 'Home',
+            'orders' => Order::all(),
+            'categories' => Category::all()
         ]);
     }
 

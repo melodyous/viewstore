@@ -69,18 +69,6 @@ class DatabaseSeeder extends Seeder
             'image' => '/storage/product-images/amdradeon.jpg'
         ]);
 
-        $name = 'Asrock Radeon RX 6500 XT PHANTOM';
-        $name = strtolower($name);
-        $name = str_replace(' ', '-', $name);
-        Product::create([
-            'category_id' => 3,
-            'product_id' => $name,
-            'name' => 'Asrock Radeon RX 6500 XT PHANTOM',
-            'price' => 2610000,
-            'stock' => 50,
-            'image' => '/storage/product-images/amdradeon.jpg'
-        ]);
-
 
 
 
@@ -99,6 +87,25 @@ class DatabaseSeeder extends Seeder
             'name' => 'Graphic Card'
         ]);
 
+        Category::create([
+            'category_id' => 'P-monitor',
+            'name' => 'Monitor'
+        ]);
+
+        Category::create([
+            'category_id' => 'P-memory',
+            'name' => 'Memory'
+        ]);
+
+        Category::create([
+            'category_id' => 'P-power-supply',
+            'name' => 'Power Supply'
+        ]);
+
+        Category::create([
+            'category_id' => 'P-mainboard',
+            'name' => 'Mainboard'
+        ]);
 
 
         User::create([
