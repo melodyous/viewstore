@@ -46,7 +46,8 @@ class HomeOrderController extends Controller
         $order_item = Product::where('id', $request->order_item)->first();
 
         $rules = [
-            'customer_name' => 'required|String' 
+            'customer_name' => 'required|String',
+            'order_status' => 'required|String'
         ];
 
         $validatedData = $request->validate($rules);
@@ -54,6 +55,8 @@ class HomeOrderController extends Controller
         // $validatedData['order_item'] = $request->order_item;
         $validatedData['total'] = $request->total;
         $validatedData['order_item'] = $order_item['name'];
+        $validatedData['customer_phone'] = $request->customer_phone;
+        $validatedData['customer_email'] = $request->customer_email;
 
         // dd($validatedData);
 
@@ -70,7 +73,11 @@ class HomeOrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('home.orders.show', [
+            'title' => 'Order Details',
+            'orders' => Order::orderBy('id', 'desc')->get(),
+            'orderShow' => $order
+        ]);
     }
 
     /**
