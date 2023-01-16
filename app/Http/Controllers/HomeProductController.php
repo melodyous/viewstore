@@ -83,6 +83,7 @@ class HomeProductController extends Controller
             'title' => 'Product Details',
             'productShow' => $product,
             'products' => Product::orderBy('category_id', 'desc')->get(),
+
         ]);
     }
 

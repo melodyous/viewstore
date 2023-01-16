@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeOrderController extends Controller
@@ -18,6 +19,7 @@ class HomeOrderController extends Controller
         return view('home.orders.index', [
             'title' => 'Orders',
             'products' => Product::all(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -85,5 +87,20 @@ class HomeOrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function findProductName(Request $request){
+
+        // get data request and query
+        $data = Product::select('name', 'id')->where('category_id', $request->id)->get();
+
+        return response()->json($data);
+    }
+
+    public function findPrice(Request $request){
+        // get data request and query
+        $product = Product::select('price')->where('id', $request->id)->first();
+
+        return response()->json($product);
     }
 }

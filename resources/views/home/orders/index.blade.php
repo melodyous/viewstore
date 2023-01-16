@@ -26,23 +26,34 @@
                 </div>
 
                 <div class="input-group mb-2">
-                    <span class="input-group-text @error('order1') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Item</span>
-                    <select class="form-select @error('order1') is-invalid @enderror" name="order1">
-                        <option value="" selected>No item chosen</option>
-                        @php
-                            
-                        @endphp
-                        @foreach ($products as $product)
-                            <option value="{{ $product->id }}" @selected(true)>{{ $product->name }}</option>
-                            @endforeach
-                        </select>
-                        <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Rp. " aria-label="Username" aria-describedby="addon-wrapping" value="@currency($product['price'])">
+                    <span class="input-group-text @error('order1') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Category</span>
+                    <select class="form-select @error('order1') is-invalid @enderror" id="productCategory" name="order1">
+                        <option value="" disabled="true" selected>No category chosen</option>
+                        @foreach ($categories as $caregory)
+                            <option value="{{ $caregory->id }}">{{ $caregory->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="input-group mb-2">
+                    <span class="input-group-text @error('order1') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Product</span>
+                    <select class="form-select @error('order1') is-invalid @enderror" id="productName" name="order1">
+                        <option value="" disabled="true" selected>No product chosen</option>
+                    </select>
+                </div>
+
+
+                <div class="input-group flex-nowrap mb-2">
+                    <span class="input-group-text bg-white border-0" id="addon-wrapping" style="width: 150px"></span>
+                    <input type="text" name="price1" class="form-control" aria-describedby="addon-wrapping" id="productPrice" @disabled(true)>
                 </div>
                 @error('order1')
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
                 </div>
                 @enderror
+
+
 
                 <button class="btn text-white" type="submit" style="background-color: #183153">Add Order</button>
             </form>
@@ -52,4 +63,75 @@
         </div>
     </div>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/autoNumeric/autoNumeric.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        // start find product name from category
+        $(document).on('change', '#productCategory', function(){
+            // console.log('berhasil milih');
+
+            var category_id = $(this).val();
+            // console.log(category_id);
+
+
+            var div = $(this).parent().parent();
+            var op = " ";
+            // send request with ajax
+            $.ajax({
+                type: 'get',
+                url: '{!! URL::to('findProductName') !!}',
+                data: {'id': category_id},
+                success: function(data){
+                    // console.log('success');
+                    // console.log(data);
+
+                    op += '<option value="" disabled="true" selected>Choose a product</option>';
+                    for(var i = 0; i < data.length; i++){
+                        op += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                    }
+
+                    div.find('#productName').html(" ");
+                    div.find('#productName').append(op);
+
+                },
+                error: function(){
+
+                }
+            });
+        });
+        // end find product name from category
+
+        // start find product price from product
+        $(document).on('change', '#productName', function(){
+            
+            var product_id = $(this).val();
+
+            var a = $(this).parent().parent();
+            // console.log(product_id);
+
+            var op = "";
+
+            $.ajax({
+                type: 'get',
+                url: '{!! URL::to('findPrice') !!}',
+                data: {'id': product_id},
+                dataType: 'json',
+                success: function(data){
+                    console.log(data.price);
+                    a.find('#productPrice').val(data.price).autoNumeric('init');
+                },
+                error: function(){
+
+                }
+            });
+        });
+        // end find product price from product
+
+    });
+
+</script>
 @endsection

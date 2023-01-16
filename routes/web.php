@@ -32,4 +32,8 @@ Route::resource('/home/products', HomeProductController::class)->middleware('aut
 // resource CRUD orders
 Route::resource('/home/orders', HomeOrderController::class)->middleware('auth');
 
+// get data ajax
+Route::get('/findProductName', [HomeOrderController::class, 'findProductName'])->middleware('auth');
+Route::get('/findPrice', [HomeOrderController::class, 'findPrice'])->middleware('auth');
+
 
