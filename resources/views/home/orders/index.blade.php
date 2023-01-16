@@ -7,7 +7,7 @@
 
 <section>
     <div class="row">
-        <div class="col-md-7 px-4">
+        <div class="col-md-7 px-4 py-3">
             <form action="/home/orders" method="POST">
                 @csrf
 
@@ -58,8 +58,57 @@
                 <button class="btn text-white" type="submit" style="background-color: #183153">Add Order</button>
             </form>
         </div>
-        <div class="col-md-5 px-4">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo reiciendis veniam nostrum odio veritatis in molestiae laudantium? Quibusdam eligendi libero consequuntur aliquid, iusto laborum, atque sit obcaecati ipsum illo vel doloremque nobis recusandae neque placeat ex rem. Similique magni quidem corporis itaque incidunt deserunt mollitia quas, quod possimus commodi at cum ipsa eum doloribus ex id pariatur nisi, veritatis ab exercitationem, quibusdam odit vero temporibus repellat? Vitae quod sint, in amet illum modi autem aut, nesciunt quibusdam nobis nulla? Exercitationem, minus placeat earum laudantium tenetur illum animi sequi voluptates dolor maiores molestias amet dignissimos nemo saepe velit neque unde impedit quisquam, natus quia aliquam consequatur. Cupiditate distinctio iusto eveniet numquam sunt blanditiis doloribus odio dignissimos impedit omnis voluptate ut deserunt dolorum rem magnam voluptatem exercitationem et maiores totam quis, amet officia non quisquam? Nisi placeat ex ducimus! Sunt voluptate pariatur commodi accusamus et quas reprehenderit quaerat ea minus facilis repellat cupiditate a consectetur, vero molestiae fugiat maiores possimus ut hic ipsa non amet exercitationem! Quia veritatis in, rerum hic soluta corrupti ea architecto deserunt tenetur odio molestias quae nemo quos totam aut et sequi dignissimos! Laborum deleniti rerum numquam quas neque, quidem incidunt, vero rem tempore repudiandae voluptates, dignissimos corrupti.</p>
+        <div class="col-md-5 px-4 py-3">
+            <h4 class="fw-bold">Order List</h4>
+            <hr class="mb-4">
+            <section>
+                <div class="table-responsive text-nowrap">
+                    <!--Table-->
+                    <table class="table table-striped" style="height: 60vh">
+                
+                        <!--Table head-->
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th class="text-center"><i class="fa-solid fa-gear"></i></th>
+                            <th>Customer</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <!--Table head-->
+                
+                        <!--Table body-->
+                        <tbody>
+                        @foreach ($orders as $order)    
+                        <tr>
+                            <td scope="row">{{ $loop->iteration . "." }}</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+                                    <ul class="dropdown-menu position-absolute">
+                                        <li><a class="dropdown-item" href="/home/orders/{{ $order->id }}"><i class="fa-regular fa-eye"></i> Show</a></li>
+                                        <li><a class="dropdown-item" href="/home/orders/{{ $order->id }}/edit"><i class="fa-regular fa-pen-to-square"></i> Edit</a></li>
+                                        <form action="/home/orders/{{ $order->id }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="dropdown-item" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-ban"></i> Delete</button>
+                                        </form>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>{{ $order->customer_name }}</td>
+                            <td>@currency($order['total'])</td>
+                        </tr>
+                        @endforeach
+                
+                        </tbody>
+                        <!--Table body-->
+                
+                
+                    </table>
+                    <!--Table-->
+                </div>
+            </section>
         </div>
     </div>
 </section>

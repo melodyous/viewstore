@@ -19,7 +19,8 @@ class HomeOrderController extends Controller
         return view('home.orders.index', [
             'title' => 'Orders',
             'products' => Product::all(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'orders' => Order::all()
         ]);
     }
 
@@ -103,7 +104,8 @@ class HomeOrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        Order::destroy($order->id);
+        return redirect('/home/orders/')->with('success', 'An order has been deleted!');
     }
 
     public function findProductName(Request $request){
