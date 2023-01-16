@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeOrderController;
 use App\Http\Controllers\HomeProductController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +28,8 @@ Route::post('/logout', [PageController::class, 'logout']);
 
 // resource CRUD products
 Route::resource('/home/products', HomeProductController::class)->middleware('auth');
+
+// resource CRUD orders
+Route::resource('/home/orders', HomeOrderController::class)->middleware('auth');
 
 
