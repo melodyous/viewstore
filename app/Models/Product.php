@@ -16,6 +16,10 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // public function order(){
+    //     return $this->
+    // }
+
     public function getRouteKeyName(){
         return 'product_id';
     }

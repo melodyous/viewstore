@@ -41,7 +41,24 @@ class HomeOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $order_item = Product::where('id', $request->order_item)->first();
+
+        $rules = [
+            'customer_name' => 'required|String' 
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        // $validatedData['order_item'] = $request->order_item;
+        $validatedData['total'] = $request->total;
+        $validatedData['order_item'] = $order_item['name'];
+
+        // dd($validatedData);
+
+        Order::create($validatedData);
+
+        return redirect('/home/orders')->with('success', 'New order has been added!');
     }
 
     /**

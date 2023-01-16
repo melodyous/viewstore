@@ -1,6 +1,10 @@
 @extends('home.partials.main')
 
 @section('container')
+@if( session()->has('success') )
+    @include('home.partials.modalNotif')
+@endif
+
 <section>
     <div class="row">
         <div class="col-md-7 px-4">
@@ -37,7 +41,7 @@
 
                 <div class="input-group mb-2">
                     <span class="input-group-text @error('order1') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Product</span>
-                    <select class="form-select @error('order1') is-invalid @enderror" id="productName" name="order1">
+                    <select class="form-select @error('order1') is-invalid @enderror" id="productName" name="order_item">
                         <option value="" disabled="true" selected>No product chosen</option>
                     </select>
                 </div>
@@ -45,13 +49,9 @@
 
                 <div class="input-group flex-nowrap mb-2">
                     <span class="input-group-text bg-white border-0" id="addon-wrapping" style="width: 150px"></span>
-                    <input type="text" name="price1" class="form-control" aria-describedby="addon-wrapping" id="productPrice" @disabled(true)>
+                    <input type="text" class="form-control" aria-describedby="addon-wrapping" id="productPrice" @disabled(true)>
+                    <input name="total" id="total" type="hidden">
                 </div>
-                @error('order1')
-                <div class="alert alert-danger" role="alert">
-                    {{ $message }}
-                </div>
-                @enderror
 
 
 
@@ -123,6 +123,7 @@
                 success: function(data){
                     console.log(data.price);
                     a.find('#productPrice').val(data.price).autoNumeric('init');
+                    a.find('#total').val(data.price);
                 },
                 error: function(){
 
@@ -132,6 +133,13 @@
         // end find product price from product
 
     });
+
+    // tutup modal notifikasi
+    document.querySelector('#notification-modal').addEventListener('click', evt => {
+        if( !evt.target.matches('button') ) return;
+        const button = document.querySelector('#notification-modal');
+        button.classList.remove('show', 'd-block');
+    })
 
 </script>
 @endsection

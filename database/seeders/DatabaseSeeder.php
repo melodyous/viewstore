@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
         $name = strtolower($name);
         $name = str_replace(' ', '-', $name);
         Product::create([
-            'category_id' => 2,
+            'category_id' => 3,
             'product_id' => $name,
             'name' => 'Asrock Radeon RX 6500 XT PHANTOM',
             'price' => 2610000,
@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
         $name = strtolower($name);
         $name = str_replace(' ', '-', $name);
         Product::create([
-            'category_id' => 2,
+            'category_id' => 3,
             'product_id' => $name,
             'name' => 'Asrock Radeon RX 6500 XT PHANTOM',
             'price' => 2610000,
@@ -92,6 +92,11 @@ class DatabaseSeeder extends Seeder
         Category::create([
             'category_id' => 'P-storage',
             'name' => 'Storage'
+        ]);
+
+        Category::create([
+            'category_id' => 'P-graphic-card',
+            'name' => 'Graphic Card'
         ]);
 
 
