@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 
 class HomeUserController extends Controller
@@ -82,7 +83,11 @@ class HomeUserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('home.users.edit', [
+            'title' => 'User settings',
+            'users' => User::all(),
+            'userEdit' => $user
+        ]);
     }
 
     /**
@@ -94,7 +99,30 @@ class HomeUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+        
+        $rules = [
+            'name' => 'required|String',
+            'isAdmin' => 'required|boolean'
+        ];
+
+        if($request->username != $user->username){
+            $rules['username'] = 'required|String|unique:users';
+        }
+
+        if($request->email != $user->email){
+            $rules['email'] = 'required|String|unique:users';
+        }
+
+        $validatedData = $request->validate($rules);
+        if($request->password){
+            $validatedData['password'] = bcrypt($request->password);
+        }
+        
+        User::where('id', $user->id)->update($validatedData);
+
+        $getUrl = session()->previousUrl();
+        return redirect($getUrl)->with('success', 'An user data has been changed!');
     }
 
     /**
@@ -105,6 +133,11 @@ class HomeUserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+
+        $userFirst = User::first()->get('id');
+
+        $getUrl = session()->previousUrl();
+        return redirect('/home/users/' . auth()->user()->id . '/edit')->with('success', 'An user has been deleted!');
     }
 }
