@@ -94,13 +94,13 @@
                         <form action="/home/products/{{ $product->product_id }}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
+                        </div>
                             <button class="badge bg-danger border-0 p-2 m-1" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-ban"></i> Delete</button>
                         </form>
                     </div>
                     </div>
                 </div>
                 </div>
-            </div>
             @endforeach
     
             

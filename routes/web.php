@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeOrderController;
 use App\Http\Controllers\HomeProductController;
+use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +36,8 @@ Route::resource('/home/orders', HomeOrderController::class)->middleware('auth');
 // get data ajax
 Route::get('/findProductName', [HomeOrderController::class, 'findProductName'])->middleware('auth');
 Route::get('/findPrice', [HomeOrderController::class, 'findPrice'])->middleware('auth');
+
+// resource CRUD user
+Route::resource('/home/users', HomeUserController::class)->middleware('auth');
 
 

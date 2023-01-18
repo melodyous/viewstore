@@ -34,7 +34,10 @@
                     <i class="fa-solid fa-user"></i> {{ auth()->user()->name }}
                 </a>
                 <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/dashboard/users/{{ auth()->user()->id }}"><i class="fa-solid fa-user-gear"></i> Settings</a></li>
+                <li><a class="dropdown-item" href="/home/users/{{ auth()->user()->id }}/edit"><i class="fa-solid fa-user-gear"></i> Settings</a></li>
+                <li>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalAddUser" id="modalAddUser_show"><i class="fa-solid fa-user"></i> Add User</button>
+                </li>
                 <li><a class="dropdown-item" href="/home/info"><i class="fa-solid fa-bullhorn"></i> Info</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li class="dropdown-item">

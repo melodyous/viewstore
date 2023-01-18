@@ -11,6 +11,7 @@
   <body>
     
     @include('home.partials.navbar')
+    @include('home.partials.modalAddUser')
 
     <div class="container" style="margin-top: 100px">
         @yield('container')
@@ -18,5 +19,21 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script>
+      // tutup modal notifikasi
+      document.querySelector('#modalAddUser_show').addEventListener('click', evt => {
+          if( !evt.target.matches('button') ) return;
+          var modal = document.getElementById("#modalAddUser");
+          modal.classList.add('d-block');
+      })
+
+      const myModal = document.getElementById('#modalAddUser_show')
+      const myInput = document.getElementById('modalAddUser')
+
+      myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+      })
+    </script>
   </body>
+
 </html>
