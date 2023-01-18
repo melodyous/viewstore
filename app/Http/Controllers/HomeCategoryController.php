@@ -100,6 +100,9 @@ class HomeCategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+
+        $getUrl = session()->previousUrl();
+        return redirect($getUrl)->with('success', 'Category has been deleted!');
     }
 }

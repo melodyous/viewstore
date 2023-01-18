@@ -45,8 +45,3 @@ Route::resource('/home/users', HomeUserController::class)->middleware('auth');
 // resource CRUD category
 Route::resource('/home/categories', HomeCategoryController::class)->middleware('auth');
 
-// show all category
-Route::get('/home*', function(){
-    $categories = Category::all();
-    return $categories;
-});

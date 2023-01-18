@@ -76,7 +76,8 @@ class HomeOrderController extends Controller
         return view('home.orders.show', [
             'title' => 'Order Details',
             'orders' => Order::orderBy('id', 'desc')->get(),
-            'orderShow' => $order
+            'orderShow' => $order,
+            'categories' => Category::all()
         ]);
     }
 
@@ -91,7 +92,8 @@ class HomeOrderController extends Controller
         return view('home.orders.edit', [
             'title' => 'Edit data order',
             'orderEdit' => $order,
-            'orders' => Order::all()
+            'orders' => Order::all(),
+            'categories' => Category::all()
         ]);
     }
 

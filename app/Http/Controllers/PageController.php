@@ -12,14 +12,16 @@ class PageController extends Controller
 {
     public function index(){
         return view('index', [
-            'title' => 'Login'
+            'title' => 'Login',
+            'categories' => Category::all()
         ]);
     }
 
     public function info(){
         return view('home.info', [
             'title' => 'Info',
-            'user' => User::first()
+            'user' => User::first(),
+            'categories' => Category::all()
         ]);
     }
 

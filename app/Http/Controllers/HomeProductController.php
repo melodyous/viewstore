@@ -18,6 +18,7 @@ class HomeProductController extends Controller
         return view('home.products.index', [
             'title' => 'Products',
             'products' => Product::all(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -83,7 +84,7 @@ class HomeProductController extends Controller
             'title' => 'Product Details',
             'productShow' => $product,
             'products' => Product::orderBy('category_id', 'desc')->get(),
-
+            'categories' => Category::all()
         ]);
     }
 

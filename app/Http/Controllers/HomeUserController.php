@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
@@ -86,7 +87,8 @@ class HomeUserController extends Controller
         return view('home.users.edit', [
             'title' => 'User settings',
             'users' => User::all(),
-            'userEdit' => $user
+            'userEdit' => $user,
+            'categories' => Category::all()
         ]);
     }
 

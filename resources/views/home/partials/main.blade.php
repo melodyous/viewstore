@@ -13,6 +13,7 @@
     @include('home.partials.navbar')
     @include('home.partials.modalAddUser')
     @include('home.partials.modalAddCategory')
+    @include('home.partials.modalShowCategory')
 
 
     <div class="container" style="margin-top: 100px">
@@ -36,11 +37,18 @@
         myInput.focus()
       })
 
-      const myModal = document.getElementById('#modalAddCategory_show')
-      const myInput = document.getElementById('modalAddCategory')
+      const modalAddCategory = document.getElementById('#modalAddCategory_show')
+      const inputAddCategory = document.getElementById('modalAddCategory')
 
-      myModal.addEventListener('shown.bs.modal', () => {
-        myInput.focus()
+      modalAddCategory.addEventListener('shown.bs.modal', () => {
+        inputAddCategory.focus()
+      })
+
+      const modalShowCategory = document.getElementById('#modalCategory_show')
+      const showCategory = document.getElementById('modalShowCategory')
+
+      modalShowCategory.addEventListener('shown.bs.modal', () => {
+        showCategory.focus()
       })
     </script>
 
