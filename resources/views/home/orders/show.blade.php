@@ -23,7 +23,7 @@
             <form action="/home/orders" method="POST">
                 @csrf
 
-                <h3 class="fw-bold">Make New Order</h3>
+                <h3 class="fw-bold">Details Order</h3>
                 <hr class="mb-4">
 
                 <div class="input-group flex-nowrap mb-2">
@@ -47,8 +47,13 @@
                 </div>
 
                 <div class="input-group flex-nowrap mb-2">
+                    <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Amount</span>
+                    <input type="text" name="name" id="floatingInput" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderShow->amount }}">
+                </div>
+
+                <div class="input-group flex-nowrap mb-2">
                     <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Price</span>
-                    <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderShow->total }}">
+                    <input type="text" name="name" id="floatingInput" class="form-control @error('name') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="@currency($orderShow['total'])">
                 </div>
 
                 <div class="input-group flex-nowrap mb-2">
@@ -65,6 +70,7 @@
                     <span class="input-group-text @error('stock') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Status</span>
                     <input type="text" name="name" id="floatingInput" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ $orderShow->order_status }}">
                 </div>
+                
             </form>
         </div>
         <div class="col-md-5 px-4 py-3">

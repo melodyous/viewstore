@@ -47,16 +47,19 @@ class HomeOrderController extends Controller
 
         $rules = [
             'customer_name' => 'required|String',
-            'order_status' => 'required|String'
+            'order_status' => 'required|String',
+            'amount' => 'required|Integer'
         ];
 
         $validatedData = $request->validate($rules);
 
         // $validatedData['order_item'] = $request->order_item;
-        $validatedData['total'] = $request->total;
         $validatedData['order_item'] = $order_item['name'];
         $validatedData['customer_phone'] = $request->customer_phone;
         $validatedData['customer_email'] = $request->customer_email;
+        
+        $validatedData['amount'] = $request->amount;
+        $validatedData['total'] = $request->total * $validatedData['amount'];
 
         // dd($validatedData);
 

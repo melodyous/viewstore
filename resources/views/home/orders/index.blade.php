@@ -29,6 +29,11 @@
                     <input type="text" name="customer_email" id="floatingInput" class="form-control @error('customer_email') is-invalid @enderror" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('customer_email') }}">
                 </div>
 
+                <div class="input-group flex-nowrap mb-2">
+                    <span class="input-group-text @error('customer_phone') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Amount</span>
+                    <input type="text" name="amount" id="productAmount" class="form-control @error('customer_phone') is-invalid @enderror" placeholder="1" aria-label="Username" aria-describedby="addon-wrapping" value="{{ old('amount') }}">
+                </div>
+
                 <div class="input-group mb-2">
                     <span class="input-group-text @error('order1') border border-danger @enderror" id="addon-wrapping" style="width: 150px">Category</span>
                     <select class="form-select @error('order1') is-invalid @enderror" id="productCategory" name="order1">
@@ -51,6 +56,11 @@
                     <span class="input-group-text bg-white border-0" id="addon-wrapping" style="width: 150px"></span>
                     <input type="text" class="form-control" aria-describedby="addon-wrapping" id="productPrice" @disabled(true)>
                     <input name="total" id="total" type="hidden">
+                </div>
+
+                <div class="input-group flex-nowrap mb-2">
+                    <span class="input-group-text" id="addon-wrapping" style="width: 150px">Total</span>
+                    <input type="text" class="form-control" aria-describedby="addon-wrapping" id="productPriceTotal" @disabled(true)>
                 </div>
 
                 <div class="input-group mb-2">
@@ -184,6 +194,9 @@
                     console.log(data.price);
                     a.find('#productPrice').val(data.price).autoNumeric('init');
                     a.find('#total').val(data.price);
+
+                    const amount = a.find('#productAmount').val();
+                    a.find('#productPriceTotal').val(data.price * amount).autoNumeric('init');
                 },
                 error: function(){
 
