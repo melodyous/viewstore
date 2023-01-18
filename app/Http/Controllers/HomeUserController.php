@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class HomeUserController extends Controller
 {
@@ -35,7 +36,31 @@ class HomeUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required|String',
+            'username' => 'required|String|unique:users',
+            'email' => 'required|String|unique:users',
+            'password' => 'required',
+            'isAdmin' => 'required|boolean'
+        ];
+
+        
+
+        $urlRules = $request->name == NULL || $request->username == NULL || $request->email == NULL || $request->password == NULL || $request->isAdmin == NULL; 
+
+        if($urlRules){
+            return back()->with('success', 'Failed to add user, your input is invalid. Please try again!');
+        }
+        
+        $validatedData = $request->validate($rules);
+        $validatedData['password'] = bcrypt($validatedData['password']);
+
+        // dd($validatedData);
+
+        User::create($validatedData);
+
+        $getUrl = session()->previousUrl();
+        return redirect($getUrl)->with('success', 'A new user has been added!');
     }
 
     /**

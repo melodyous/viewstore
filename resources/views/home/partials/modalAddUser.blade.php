@@ -13,8 +13,13 @@
 
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1" style="width:100px">Name</span>
-              <input type="text" class="form-control" placeholder="Full Name" aria-label="Username" aria-describedby="basic-addon1" name="name" value="{{ old('name') }}">
+              <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Full Name" aria-label="Username" aria-describedby="basic-addon1" name="name" value="{{ old('name') }}">
             </div>
+            @error('name')
+              <div class="alert alert-danger" role="alert">
+                {{ $message }}
+              </div>
+            @enderror
   
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1" style="width:100px">Username</span>
@@ -35,8 +40,8 @@
               <span class="input-group-text @error('isAdmin') border border-danger @enderror" id="addon-wrapping" style="width: 100px">Role</span>
               <select class="form-select @error('isAdmin') is-invalid @enderror" name="isAdmin">
                   <option value="" @disabled(true) selected>No Role chosen</option>
-                  <option value="true" selected>Admin</option>
-                  <option value="false" selected>Not Admin</option>
+                  <option value="1" selected>Admin</option>
+                  <option value="0" selected>Not Admin</option>
               </select>
             </div>
   

@@ -13,6 +13,7 @@
     @include('home.partials.navbar')
     @include('home.partials.modalAddUser')
 
+
     <div class="container" style="margin-top: 100px">
         @yield('container')
     </div>
@@ -34,6 +35,7 @@
         myInput.focus()
       })
     </script>
+
   </body>
 
 </html>

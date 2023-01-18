@@ -1,6 +1,9 @@
 @extends('home.partials.main')
 
 @section('container')
+@if( session()->has('success') )
+    @include('home.partials.modalNotif')
+@endif
 
 <section style="background-color: rgb(255, 255, 255);margin-top: 30px" class="shadow rounded">
 <div class="container py-5 px-5">
@@ -81,5 +84,14 @@
   </div>
 
 </section>
+<script>
 
+    // tutup modal notifikasi
+    document.querySelector('#notification-modal').addEventListener('click', evt => {
+        if( !evt.target.matches('button') ) return;
+        const button = document.querySelector('#notification-modal');
+        button.classList.remove('show', 'd-block');
+    })
+
+</script>
 @endsection
