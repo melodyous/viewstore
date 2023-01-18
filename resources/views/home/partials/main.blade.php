@@ -12,6 +12,7 @@
     
     @include('home.partials.navbar')
     @include('home.partials.modalAddUser')
+    @include('home.partials.modalAddCategory')
 
 
     <div class="container" style="margin-top: 100px">
@@ -30,6 +31,13 @@
 
       const myModal = document.getElementById('#modalAddUser_show')
       const myInput = document.getElementById('modalAddUser')
+
+      myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+      })
+
+      const myModal = document.getElementById('#modalAddCategory_show')
+      const myInput = document.getElementById('modalAddCategory')
 
       myModal.addEventListener('shown.bs.modal', () => {
         myInput.focus()

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Nette\Utils\Validators;
 
 class HomeCategoryController extends Controller
 {
@@ -35,7 +37,25 @@ class HomeCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required|String'
+        ];
+
+        if($request->name == NULL){
+            return back()->with('success', 'Failed to add category. Category name is required!');
+        }
+
+        $validatedData = $request->validate($rules);
+
+        $validatedData['category_id'] = $request->name;
+        $validatedData['category_id'] = strtolower($validatedData['category_id']);
+        $validatedData['category_id'] = str_replace(' ', '-', $validatedData['category_id']);
+        $validatedData['category_id'] = "P-" . $validatedData['category_id'];
+
+        Category::create($validatedData);
+
+        $getUrl = session()->previousUrl();
+        return redirect($getUrl)->with('success', 'New category has been added!');
     }
 
     /**

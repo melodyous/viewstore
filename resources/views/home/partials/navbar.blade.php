@@ -24,7 +24,9 @@
                   <li><a class="dropdown-item" href="/home/products/create"><i class="fa-solid fa-file-circle-plus"></i> Add Product</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="/home/categories"><i class="fa-solid fa-layer-group"></i> All Products Category</a></li>
-                  <li><a class="dropdown-item" href="/home/categories/create"><i class="fa-solid fa-file-circle-plus"></i> Add Products Category</a></li>
+                  <li>
+                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalAddCategory" id="modalAddcategory_show"><i class="fa-solid fa-file-circle-plus"></i> Add Products Category</button>
+                  </li>
                 </ul>
             </li>
 

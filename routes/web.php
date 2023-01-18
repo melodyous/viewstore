@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\HomeCategoryController;
 use App\Http\Controllers\HomeOrderController;
 use App\Http\Controllers\HomeProductController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\PageController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,4 +42,11 @@ Route::get('/findPrice', [HomeOrderController::class, 'findPrice'])->middleware(
 // resource CRUD user
 Route::resource('/home/users', HomeUserController::class)->middleware('auth');
 
+// resource CRUD category
+Route::resource('/home/categories', HomeCategoryController::class)->middleware('auth');
 
+// show all category
+Route::get('/home*', function(){
+    $categories = Category::all();
+    return $categories;
+});
