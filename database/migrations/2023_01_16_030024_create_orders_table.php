@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('customer_phone')->nullable();
             $table->string('customer_email')->nullable();
             $table->string('order_item');
+            $table->integer('amount');
             $table->integer('total');
             $table->string('order_status')->default('Waiting for payment');
             $table->timestamps();
