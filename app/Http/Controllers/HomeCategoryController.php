@@ -49,7 +49,7 @@ class HomeCategoryController extends Controller
 
         $validatedData['category_id'] = $request->name;
         $validatedData['category_id'] = strtolower($validatedData['category_id']);
-        $validatedData['category_id'] = str_replace(' ', '-', $validatedData['category_id']);
+        $validatedData['category_id'] = preg_replace('/[^A-Za-z0-9. -]/', '-', $validatedData['category_id']);
         $validatedData['category_id'] = "P-" . $validatedData['category_id'];
 
         Category::create($validatedData);

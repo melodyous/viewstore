@@ -63,7 +63,7 @@ class HomeProductController extends Controller
 
         $validatedData['product_id'] = $validatedData['name'];
         $validatedData['product_id'] = strtolower($validatedData['product_id']);
-        $validatedData['product_id'] = str_replace(' ', '-', $validatedData['product_id']);
+        $validatedData['product_id'] = preg_replace('/[^A-Za-z0-9. -]/', '-', $validatedData['product_id']);
 
         // dd($validatedData);
 
