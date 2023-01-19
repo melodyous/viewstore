@@ -44,7 +44,7 @@
                   <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalAddUser" id="modalAddUser_show"><i class="fa-solid fa-user"></i> Add User</button>
                 </li>
                 <li>
-                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalShowUsers" id="modalShowUsers_show"><i class="fa-solid fa-user"></i> All Users</button>
+                  <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalShowUsers" id="modalShowUsers_show"><i class="fa-solid fa-users"></i> All Users</button>
                 </li>
                 <li><a class="dropdown-item" href="/home/info"><i class="fa-solid fa-bullhorn"></i> Info</a></li>
                 <li><hr class="dropdown-divider"></li>

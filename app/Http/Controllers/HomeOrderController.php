@@ -33,7 +33,7 @@ class HomeOrderController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**

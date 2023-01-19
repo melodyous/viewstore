@@ -17,7 +17,7 @@ class HomeUserController extends Controller
      */
     public function index()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -27,7 +27,7 @@ class HomeUserController extends Controller
      */
     public function create()
     {
-        
+        abort(404);
     }
 
     /**
@@ -73,7 +73,7 @@ class HomeUserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        abort(404);
     }
 
     /**

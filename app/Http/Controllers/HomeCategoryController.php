@@ -16,7 +16,7 @@ class HomeCategoryController extends Controller
      */
     public function index()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -26,7 +26,7 @@ class HomeCategoryController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -66,7 +66,7 @@ class HomeCategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -77,7 +77,7 @@ class HomeCategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -89,7 +89,7 @@ class HomeCategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        abort(403);
     }
 
     /**
