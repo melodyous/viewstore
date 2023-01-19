@@ -14,7 +14,7 @@
     @include('home.partials.modalAddUser')
     @include('home.partials.modalAddCategory')
     @include('home.partials.modalShowCategory')
-
+    @include('home.partials.modalShowUsers')
 
     <div class="container" style="margin-top: 100px">
         @yield('container')
@@ -49,6 +49,13 @@
 
       modalShowCategory.addEventListener('shown.bs.modal', () => {
         showCategory.focus()
+      })
+
+      const modalShowUsers = document.getElementById('#modalShowUsers_show')
+      const showUsers = document.getElementById('modalShowUsers')
+
+      modalShowUsers.addEventListener('shown.bs.modal', () => {
+        showUsers.focus()
       })
     </script>
 

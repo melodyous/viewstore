@@ -21,7 +21,8 @@ class PageController extends Controller
         return view('home.info', [
             'title' => 'Info',
             'user' => User::first(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'users' => User::all()
         ]);
     }
 
@@ -29,7 +30,8 @@ class PageController extends Controller
         return view('home.orders.index', [
             'title' => 'Home',
             'orders' => Order::all(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'users' => User::all()
         ]);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeProductController extends Controller
@@ -18,7 +19,8 @@ class HomeProductController extends Controller
         return view('home.products.index', [
             'title' => 'Products',
             'products' => Product::all(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'users' => User::all()
         ]);
     }
 
@@ -32,7 +34,8 @@ class HomeProductController extends Controller
         return view('home.products.create', [
             'title' => 'Add Products',
             'products' => Product::orderBy('id', 'desc')->get(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'users' => User::all()
         ]);
     }
 
@@ -84,7 +87,8 @@ class HomeProductController extends Controller
             'title' => 'Product Details',
             'productShow' => $product,
             'products' => Product::orderBy('category_id', 'desc')->get(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'users' => User::all()
         ]);
     }
 
@@ -100,7 +104,8 @@ class HomeProductController extends Controller
             'title' => 'Edit Product',
             'productEdit' => $product,
             'products' => Product::orderBy('id', 'desc')->get(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'users' => User::all()
         ]);
     }
 

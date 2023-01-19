@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeOrderController extends Controller
@@ -20,7 +21,8 @@ class HomeOrderController extends Controller
             'title' => 'Orders',
             'products' => Product::all(),
             'categories' => Category::all(),
-            'orders' => Order::all()
+            'orders' => Order::all(),
+            'users' => User::all()
         ]);
     }
 
@@ -80,7 +82,8 @@ class HomeOrderController extends Controller
             'title' => 'Order Details',
             'orders' => Order::orderBy('id', 'desc')->get(),
             'orderShow' => $order,
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'users' => User::all()
         ]);
     }
 
@@ -96,7 +99,8 @@ class HomeOrderController extends Controller
             'title' => 'Edit data order',
             'orderEdit' => $order,
             'orders' => Order::all(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'users' => User::all()
         ]);
     }
 
